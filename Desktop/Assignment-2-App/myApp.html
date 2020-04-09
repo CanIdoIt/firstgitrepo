@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Include meta tag to ensure proper rendering and touch zooming -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="stylesheet.css" />
+		<script type='text/javascript' src='clock.js'></script>
+
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		
+		
+
+		<script>
+	
+			
+			//var medicine = [[]];
+			var med={};
+			function addMedToList1(){
+				 medName1 = $("#medname1").val();
+				 medTime1 = $("#firstdose1").val();
+				
+				med[medName1] = medTime1;
+				alert(JSON.stringify(med));
+				$("#medname1").val('');
+				$("#firstdose1").val('');
+				
+				
+
+			}
+			
+			
+			function showMedList1(){
+				$.mobile.changePage("#pagetwo");
+				//$("#allMeds").text(JSON.stringify(med));//keep this
+				
+				//output = "";
+				//data = "";
+
+				for(var key in med){
+					//output += key + "-> " + med[key] + "<hr/>";
+
+					data = key + ": " + med[key];
+					$('<li>').append('<a href="#" class="ui-btn">' + data + '</a>').appendTo("#medlist"); 
+					
+				}
+				//$("#allMeds").html(output);
+			}
+			
+			function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML =
+  h + ":" + m + ":" + s ;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+		$(document).ready(startTime);
+		//$( window ).on( "load", startTime );
+		</script>
+		<style>
+#demo {
+  text-align: center;
+  font-size: 30px;
+  margin-top: 0px;
+  background-color: #fdfbfd;
+}
+</style>
+	</head>
+	
+	<body>
+		<div data-role="page" id="pageone" style="background-color:#fdfbfd">        
+			<div data-role="header">
+				<div class="ui-grid-a"><!--2 column grid-->
+					<!--first column-->
+					<div class="ui-block-a">
+						<div data-role="controlgroup" data-type="horizontal">
+							<a href="#pageone" data-role="button" data-icon="home">Home</a>
+							<a href="#" data-role="button" data-icon="arrow-l">Back</a>
+						</div>
+					</div>
+					<div class="ui-block-b">
+						<div data-role="controlgroup" data-type="horizontal">
+							<a href="#" data-role="button" data-icon="delete">Delete</a>
+							<a href="#" data-role="button" data-icon="check">Save</a>
+						</div>
+					</div>
+	
+				</div>
+			</div>
+
+			<div data-role="main" class="ui-content">
+			
+					<div id="txt"></div>
+					
+				<p id="demo"></p>
+
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+//var h = $("#firstdose1").val();
+
+//var countDown = new Date(h);
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s " + "Time till next dose";
+  
+  //Output the result in an element with id="demo"
+  //document.getElementById("demo").innerHTML = h;
+    
+  // If the count down is over, write some text - or alert
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+
+					
+				<a href="#pagetwo"> go to page 2</a>
+				<p>Use this form to create your medicine list</p>
+
+				<div data-role="collapsible-set">
+					<div data-role="collapsible" data-collapsed="true">
+						<!--automatically becomes a button-->
+					<h3>Add medication</h3>
+					<form method="post" action="#">
+						<div class="ui-field-contain">
+							<label for="medname1" data-corners="true" data-shadow="true">Medicine name:</label>
+							<input type="text" name="medname1" id="medname1" data-corners="true" data-shadow="true">
+							  
+							<label for="firstdose1"data-corners="true" data-shadow="true" >Time for dose:</label>
+							<input type="time" name="firstdose1" id="firstdose1" data-corners="true" data-shadow="true">
+						</div>
+						<!--	<input type="submit" value="Add Med" data-inline="true" onclick="addMedToList()"> -->
+							<button onclick="addMedToList1()">Add med</button>
+						  </form>
+					</div>
+  
+					</div>
+					<!-- <input type="submit" value="show med list1" data-inline="true" onclick="showMedList()">-->
+					<input type="submit" value="show med list" data-inline="true" onclick="showMedList1()">
+				</div>
+			</div>
+
+			
+			
+			<div data-role="footer" data-position="fixed" data-fullscreen="true">&copy; 15037963   2020</div>
+		</div>
+		
+		
+		<!--second page -->
+		<div data-role="page" id="pagetwo">
+			<div data-role="header">
+				<div class="ui-grid-a"><!--2 column grid-->
+					<!--first column-->
+					<div class="ui-block-a">
+						<div data-role="controlgroup" data-type="horizontal">
+							<a href="#pageone" data-role="button" data-icon="home">Home</a>
+							<a href="#" data-role="button" data-icon="arrow-l">Back</a>
+						</div>
+					</div>
+					<div class="ui-block-b">
+						<div data-role="controlgroup" data-type="horizontal">
+							<a href="#" data-role="button" data-icon="delete">Delete</a>
+							<a href="#" data-role="button" data-icon="check">Save</a>
+						</div>
+					</div>
+	
+				</div>
+			</div>
+			<div data-role="main" class="ui-content">
+				<a href="#pageone"> go to page 1</a>
+				
+				
+				<div id="allMeds" data-role="">
+					<ul data-role="listview" data-inset="true" id="medlist"></ul> 
+				</div> 
+		
+			
+			<div data-role="footer" data-position="fixed" data-fullscreen="true">&copy; 15037963   2020</div>
+		</div>
+		
+		
+		
+	</body>
+	
+</html>	
