@@ -104,8 +104,38 @@ function checkTime(i) {
 				<p id="demo"></p>
 
 <script>
+
+function countdown(){
+ var month = new Array();
+  month[0] = "January";
+  month[1] = "February";
+  month[2] = "March";
+  month[3] = "April";
+  month[4] = "May";
+  month[5] = "June";
+  month[6] = "July";
+  month[7] = "August";
+  month[8] = "September";
+  month[9] = "October";
+  month[10] = "November";
+  month[11] = "December";
+
+  var d = new Date();
+  var m = month[d.getMonth()];
+  var day = d.getDate();
+  var y = d.getFullYear();
+  var time = $("#firstdose1").val();
+  
+  //$('<li>').append('<a href="#" class="ui-btn">' + data + '</a>').appendTo("#medlist"); 
+
+var dateString = m +" "+ day + ", " + y +"" + time; 
+//alert(dateString);
+
+
 // Set the date we're counting down to
-var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+var countDownDate = new Date(dateString).appendTo('#demo');
+alert(JSON.stringify(countDownDate));
+//var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
 //var h = $("#firstdose1").val();
 
 //var countDown = new Date(h);
@@ -137,6 +167,8 @@ var x = setInterval(function() {
     document.getElementById("demo").innerHTML = "EXPIRED";
   }
 }, 1000);
+
+}
 </script>
 
 					
@@ -156,7 +188,7 @@ var x = setInterval(function() {
 							<input type="time" name="firstdose1" id="firstdose1" data-corners="true" data-shadow="true">
 						</div>
 						<!--	<input type="submit" value="Add Med" data-inline="true" onclick="addMedToList()"> -->
-							<button onclick="addMedToList1()">Add med</button>
+							<button onclick="countdown()">Add med</button>
 						  </form>
 					</div>
   
